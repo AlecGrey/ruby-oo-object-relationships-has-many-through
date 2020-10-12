@@ -2,7 +2,7 @@ class Meal
 
     attr_reader :waiter, :customer, :total, :tip
 
-    @@all
+    @@all = []
 
     # ~~ CLASS METHODS ~~ #
 

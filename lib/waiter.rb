@@ -26,15 +26,13 @@ class Waiter
     end
 
     def meals
-        Meal.all.select {|meal| meal.waiter == self}
+        Meal.all.select {|meal_obj| self == meal_obj.waiter}
     end
 
     def best_tipper
-        self.meals.max_by {|meal| meal.tip}.customer
-    end
-
-    def customers
-        self.meals.map {|meal| meal.customers}.uniq
+        self.meals.reduce do |accumulator, current|
+            current.tip > accumulator.tip ? current : accumulator
+        end.customer
     end
 
 end

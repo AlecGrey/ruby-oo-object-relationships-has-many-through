@@ -1,4 +1,5 @@
 require 'pry'
+
 class Customer
 
     attr_reader :name, :age
@@ -23,14 +24,17 @@ class Customer
     end
 
     def new_meal(waiter, total, tip)
-        Meal.new(waiter, self, total, tip)
+        # initializing a new meal for self, w/waiter, total & tip
+        Meal.new(waiter, self, total, tip) #=> new meal obj
     end
 
     def meals
-        Meal.all.select {|meal| meal.customer == self}
+        # returns array of meals ordered by this customer
+        Meal.all.select {|meal_obj| self == meal_obj.customer}
     end
 
     def waiters
-        self.meals.map {|meal| meal.waiter}.uniq
+        # all waiter_obj associated with customer_obj through meal_obj
+        self.meals.map {|meal_obj| meal_obj.waiter}.uniq
     end
 end
